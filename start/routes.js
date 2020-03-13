@@ -24,3 +24,7 @@ Route.post('/posts', 'PostController.store');
 Route.get('/posts', 'PostController.index');
 Route.put('/posts/:id', 'PostController.update');
 Route.delete('/posts/:id', 'PostController.destroy');
+
+Route.post('/user', 'UserController.store');
+Route.post('/login', 'UserController.login');
+Route.get('/user', 'UserController.index').middleware('auth');
