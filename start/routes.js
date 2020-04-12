@@ -20,7 +20,7 @@ Route.get('/', () => {
   return { greeting: 'Hello world' }
 })
 
-Route.post('/posts', 'PostController.store');
+Route.post('/posts', 'PostController.store').middleware('auth');;
 Route.get('/posts', 'PostController.index');
 Route.put('/posts/:id', 'PostController.update');
 Route.delete('/posts/:id', 'PostController.destroy');
