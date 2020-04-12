@@ -3,9 +3,28 @@
 
 const Post = use('App/Models/Post');
 
+const { validateAll } = use('Validator');
+
 class PostController {
 
   async store({request, response, auth}){
+
+    const rules = {
+      title: 'required|min:25',
+      body: 'required'
+    }
+
+    const messages = {
+      'title.min': 'O campo título está muito pequeno',
+      'title.requerid': 'O título deve ser informado',
+      'body.required': 'O corpo do post deve ser informado'
+    }
+    const validate = await validateAll(request.all(), rules, messages);
+
+    if (validate.fails()){
+      return response.status(401).send({message: validate.messages()})
+    }
+
     const { id } = auth.user;
 
     // title, body
